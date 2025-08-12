@@ -8,7 +8,7 @@ from email.mime.multipart import MIMEMultipart
 
 def send_email():
     sender_email = "ben.tangen0234@gmail.com"  # Gmail sender
-    sender_password = "nbha gxnn lyan ygrr"  # Gmail app password
+    sender_password = ""  # Gmail app password
     receiver_email = "ben.tangen0234@gmail.com"  # Email recipient
 
     subject = "Blue Pass Available!"
