@@ -1,4 +1,3 @@
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
@@ -8,7 +7,9 @@ from email.mime.multipart import MIMEMultipart
 
 def send_email():
     sender_email = "ben.tangen0234@gmail.com"  # Gmail sender
-    sender_password = "nbha gxnn lyan ygrr"  # Gmail app password
+    # Read password from file
+    with open("email_password.txt", "r") as f:
+        sender_password = f.read().strip()
     receiver_email = "ben.tangen0234@gmail.com"  # Email recipient
 
     subject = "Blue Pass Available!"
@@ -49,6 +50,21 @@ last_refresh = time.time()
 number_of_refreshes = 0
 
 while True:
+    # If redirected, navigate back and confirm
+    if driver.current_url != "https://usu.t2hosted.com/per/selectpermit.aspx":
+        driver.get("https://usu.t2hosted.com/per/index.aspx")
+        time.sleep(2)
+        try:
+            # Click confirm button 3 times to return to the desired page
+            for i in range(3):
+                confirm_button = driver.find_element(By.ID, "ctl00_ctl01_MainContentPlaceHolder_T2Main_cmdNext")
+                confirm_button.click()
+                time.sleep(2)
+            print("Clicked confirm button to return to desired page.")
+            time.sleep(2)
+        except Exception as e:
+            print("Confirm button not found or error clicking:", e)
+
     # Refresh every 60 seconds to keep session up-to-date
     driver.refresh()
     
