@@ -68,6 +68,7 @@ while True:
     # Refresh every 60 seconds to keep session up-to-date
     driver.refresh()
     
+    # Increment refresh count and print total
     number_of_refreshes+= 1
     print(f"Total refreshes: {number_of_refreshes}.")
 
